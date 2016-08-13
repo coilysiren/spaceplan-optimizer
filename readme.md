@@ -25,14 +25,14 @@ var script = document.createElement('script');script.src = "https://ajax.googlea
 ```javascript
 function sigFigs(n, sig) {
   var mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1);
-  return Math.round(n * mult) / mult;
+  return Math.round(n * mult / mult);
 }
 
 function update_stats(){
   $('#manufacture__container .manufacture__item, #manufacture__container .manufacture__item--locked').each(function() {
     cost = $(this).find("#cost").text().replace(/\,/g,'');
     income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
-    ROI = Math.round(sigFigs(cost / income, 2));
+    ROI = sigFigs(cost / income, 2);
     $(this).find(".ROI").text(` ${ROI} secs`);
   });
 }
@@ -57,5 +57,4 @@ if (!window.jQuery) {
   work();
   $(document).click(function() {work();});
 }
-
 ```
