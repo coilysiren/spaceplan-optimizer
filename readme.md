@@ -20,7 +20,7 @@ Open inspect element after the page has fully loaded, then open the console. **L
 var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 ```
 
-**Wait 5 seconds, then run this script**, which creates an element and updates it every second
+**Wait 5 seconds, then run this script**
 
 ```javascript
 function sigFigs(n, sig) {
