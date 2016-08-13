@@ -20,19 +20,26 @@ Open inspect element after the page has fully loaded, then open the console. **L
 
 **Wait 5 seconds, then run this script**, which creates an element and updates it every second
 
+    function update_stats(){
+      $('#manufacture__container .manufacture__item').each(function() {
+          cost = $(this).find("#cost").text().replace(/\,/g,'');
+          income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
+          ROI = Math.round(cost / income);
+          $(this).find(".ROI").text(` ${ROI} s`);
+      });
+    }
+
     if (!window.jQuery) {
+
        console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
+
     } else {
-      $('.manufacture__item').each(function() {
-          $(this).find("#costLine").append("<span class='ROI'></span>");
+
+      $('#manufacture__container .manufacture__item').each(function() {
+          $(this).find("#costLine").append("<span class='ROI'> working...</span>");
       });
 
-      $(document).click(function() {
-          $('#manufacture__container .manufacture__item').each(function() {
-              cost = $(this).find("#cost").text().replace(/\,/g,'');
-              income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
-              ROI = Math.round(cost / income);
-              $(this).find(".ROI").text(` ${ROI} s`);
-          });
-      });
+      update_stats();
+      $(document).click(function() {update_stats();});
+
     }
