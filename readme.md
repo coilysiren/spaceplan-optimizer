@@ -26,8 +26,6 @@ function sigFigs(n, sig) {
   return Math.round(n * mult) / mult;
 }
 
-
-
 function update_stats(){
   $('#manufacture__container .manufacture__item, #manufacture__container .manufacture__item--locked').each(function() {
     cost = $(this).find("#cost").text().replace(/\,/g,'');
@@ -57,4 +55,5 @@ if (!window.jQuery) {
   work();
   $(document).click(function() {work();});
 }
+
 ```
