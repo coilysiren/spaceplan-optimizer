@@ -20,26 +20,33 @@ Open inspect element after the page has fully loaded, then open the console. **L
 
 **Wait 5 seconds, then run this script**, which creates an element and updates it every second
 
-    function update_stats(){
-      $('#manufacture__container .manufacture__item').each(function() {
-          cost = $(this).find("#cost").text().replace(/\,/g,'');
-          income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
-          ROI = Math.round(cost / income);
-          $(this).find(".ROI").text(` ${ROI} s`);
-      });
-    }
+```
+function sigFigs(n, sig) {
+    var mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1);
+    return Math.round(n * mult) / mult;
+}
 
-    if (!window.jQuery) {
+function update_stats(){
+  $('#manufacture__container .manufacture__item').each(function() {
+      cost = $(this).find("#cost").text().replace(/\,/g,'');
+      income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
+      ROI = sigFigs(cost / income, 2);
+      $(this).find(".ROI").text(` ${ROI} s`);
+  });
+}
 
-       console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
+if (!window.jQuery) {
 
-    } else {
+   console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
 
-      $('#manufacture__container .manufacture__item').each(function() {
-          $(this).find("#costLine").append("<span class='ROI'> working...</span>");
-      });
+} else {
 
-      update_stats();
-      $(document).click(function() {update_stats();});
+  $('#manufacture__container .manufacture__item').each(function() {
+      $(this).find("#costLine").append("<span class='ROI'> working...</span>");
+  });
 
-    }
+  update_stats();
+  $(document).click(function() {update_stats();});
+
+}
+```
