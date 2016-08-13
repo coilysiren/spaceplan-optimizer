@@ -1,6 +1,6 @@
 # spaceplan-optimizer
 
-Hacky coding excerise I decided to spend an hour on, which tells you the best purchases for idle game [Spaceplan](http://jhollands.co.uk/spaceplan/). It appends a "time till return on investment" to the Thing Maker information window, refreshed every second.
+Hacky coding excerise I decided to spend an hour on, which tells you the best purchases for idle game [Spaceplan](http://jhollands.co.uk/spaceplan/). It appends a "time till return on investment" to the Thing Maker information window, refreshed on click.
 
 ![Imgur](http://i.imgur.com/hhH5KkQ.png)
 
@@ -17,18 +17,18 @@ Open inspect element after the page has fully loaded, then open the console. **L
 **Wait 5 seconds, then run this script**, which creates an element and updates it every second
 
     if (!window.jQuery) {
-       console.log("jQuery not loaded! The jQuery include script does not load it immediately, so either wait a few seconds or try to load it again")
+       console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
     } else {
-      $('.manufacture__item').each(function() { 
-          $(this).find("#costLine").append("<span class='ROI'></span>")
-      })
+      $('.manufacture__item').each(function() {
+          $(this).find("#costLine").append("<span class='ROI'></span>");
+      });
 
-      window.setInterval(function(){
-          $('#manufacture__container .manufacture__item').each(function() { 
-              cost = $(this).find("#cost").text().replace(/\,/g,'')
-              income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','')
-              ROI = Math.round(cost / income)
-              $(this).find(".ROI").text(` ${ROI}s`)
-          })
-      }, 500);
+      $(document).click(function() {
+          $('#manufacture__container .manufacture__item').each(function() {
+              cost = $(this).find("#cost").text().replace(/\,/g,'');
+              income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
+              ROI = Math.round(cost / income);
+              $(this).find(".ROI").text(` ${ROI} s`);
+          });
+      });
     }
