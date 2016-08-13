@@ -39,7 +39,6 @@ function update_stats(){
 
 function add_ROI(){
   $('#manufacture__container .manufacture__item #costLine, #manufacture__container manufacture__item--locked #costLine').each(function() {
-    console.log($(this).text())
     if ($(this).text().includes('secs') == false) {
       $(this).append("<span class='ROI'> working...</span>");
     }
