@@ -17,7 +17,7 @@ Open inspect element after the page has fully loaded, then open the console. **L
 **Wait 5 seconds, then run this script**, which creates an element and updates it every second
 
     if (!window.jQuery) {
-       console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again")
+       console.log("jQuery not loaded! The jQuery include script does not load it immediately, so either wait a few seconds or try to load it again")
     } else {
       $('.manufacture__item').each(function() { 
           $(this).find("#costLine").append("<span class='ROI'></span>")
