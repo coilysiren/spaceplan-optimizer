@@ -52,7 +52,7 @@ function work(){
 }
 
 if (!window.jQuery) {
- console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
+ console.log("jQuery not loaded! The jQuery include script does not load in immediately, so either wait a few seconds or try to load it again");
 } else {
   work();
   $(document).click(function() {work();});
