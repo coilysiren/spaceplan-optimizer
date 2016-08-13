@@ -22,31 +22,39 @@ Open inspect element after the page has fully loaded, then open the console. **L
 
 ```
 function sigFigs(n, sig) {
-    var mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1);
-    return Math.round(n * mult) / mult;
+  var mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1);
+  return Math.round(n * mult) / mult;
 }
 
+
+
 function update_stats(){
-  $('#manufacture__container .manufacture__item').each(function() {
-      cost = $(this).find("#cost").text().replace(/\,/g,'');
-      income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
-      ROI = sigFigs(cost / income, 2);
-      $(this).find(".ROI").text(` ${ROI} s`);
+  $('#manufacture__container .manufacture__item, #manufacture__container .manufacture__item--locked').each(function() {
+    cost = $(this).find("#cost").text().replace(/\,/g,'');
+    income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','');
+    ROI = Math.round(sigFigs(cost / income, 2));
+    $(this).find(".ROI").text(` ${ROI} secs`);
   });
+}
+
+function add_ROI(){
+  $('#manufacture__container .manufacture__item #costLine, #manufacture__container manufacture__item--locked #costLine').each(function() {
+    console.log($(this).text())
+    if ($(this).text().includes('secs') == false) {
+      $(this).append("<span class='ROI'> working...</span>");
+    }
+  });
+}
+
+function work(){
+  add_ROI();
+  update_stats();
 }
 
 if (!window.jQuery) {
-
-   console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
-
+ console.log("jQuery not loaded! The jQuery include script does not load i immediately, so either wait a few seconds or try to load it again");
 } else {
-
-  $('#manufacture__container .manufacture__item').each(function() {
-      $(this).find("#costLine").append("<span class='ROI'> working...</span>");
-  });
-
-  update_stats();
-  $(document).click(function() {update_stats();});
-
+  work();
+  $(document).click(function() {work();});
 }
 ```
