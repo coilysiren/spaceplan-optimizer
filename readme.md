@@ -24,7 +24,7 @@ Open inspect element after the page has fully loaded, then open the console. **L
       })
 
       window.setInterval(function(){
-          $('.manufacture__item').each(function() { 
+          $('#manufacture__container .manufacture__item').each(function() { 
               cost = $(this).find("#cost").text().replace(/\,/g,'')
               income = $(this).find("#powerGain").text().replace(/\,/g,'').replace('w/sec','')
               ROI = Math.round(cost / income)
