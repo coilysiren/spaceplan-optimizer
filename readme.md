@@ -2,7 +2,7 @@
 
 Hacky coding excerise I decided to spend an hour on, which tells you the best purchases for idle game [Spaceplan](http://jhollands.co.uk/spaceplan/). It appends a "time till return on investment" to the Thing Maker information window, refreshed on click.
 
-![Imgur](http://i.imgur.com/hhH5KkQ.png)
+![Imgur](http://i.imgur.com/fEBtxyh.gif)
 
 The game's HTML is a bit... sub-optimal, so I expect this script to break at some point.
 
