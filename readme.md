@@ -16,11 +16,13 @@ Script will usually show `NaN` when there's an issue
 
 Open inspect element after the page has fully loaded, then open the console. **Load jQuery with the following script**, or via a [jQuerify bookmarklet](https://mreidsma.github.io/bookmarklets/jquerify.html).
 
-    var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
+```javascript
+var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
+```
 
 **Wait 5 seconds, then run this script**, which creates an element and updates it every second
 
-```
+```javascript
 function sigFigs(n, sig) {
   var mult = Math.pow(10, sig - Math.floor(Math.log(n) / Math.LN10) - 1);
   return Math.round(n * mult) / mult;
