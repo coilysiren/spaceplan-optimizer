@@ -14,13 +14,9 @@ Script will usually show `NaN` when there's an issue
 
 ## Usage
 
-Open inspect element after the page has fully loaded, then open the console. **Load jQuery with the following script**, or via a [jQuerify bookmarklet](https://mreidsma.github.io/bookmarklets/jquerify.html).
+Open inspect element after the page has fully loaded, then open the console.
 
-```javascript
-var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
-```
-
-**Wait 5 seconds, then run this script**
+In the console, paste in the following script:
 
 ```javascript
 function sigFigs(n, sig) {
@@ -50,10 +46,28 @@ function work(){
   update_stats();
 }
 
-if (!window.jQuery) {
-  console.log("jQuery not loaded! The jQuery include script does not load in immediately, so either wait a few seconds or try to load it again");
-} else {
+function setup() {
   work();
   $(document).click(function() {work();});
 }
+
+function load_jQuery(callback) {
+  if ( window.jQuery )
+    return callback();
+
+  var jQuery_element_ID = 'spaceplan-optimizer-jquery';
+  
+  if ( !document.getElementById(jQuery_element_ID) ) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js';
+    script.id = jQuery_element_ID;
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.setTimeout(function() { load_jQuery(callback); }, 100);
+}
+
+load_jQuery(setup);
 ```
